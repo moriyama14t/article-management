@@ -1,0 +1,13 @@
+<div class="card">
+  <%= image_tag doc.css('meta[property="og:image"] @content').to_s %>
+  <div class="card-body">
+    <h5 class="card-title"><%= doc.css('meta[property="og:title"] @content').to_s %></h5>
+    <p class="card-text"><%= doc.css('meta[property="og:description"] @content').to_s %></p>
+    <div class="container">
+      <div class="row">
+        <div class="col mx-1"><a href=<%= article.url %> class="btn btn-primary">記事詳細</a></div>
+        <div class="col mx-1"><%= button_to "削除", article, method: :delete ,class: "btn btn-danger"%></div>
+      </div>
+    </div>
+  </div>
+</div>
