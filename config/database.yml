@@ -7,15 +7,12 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: localhost
-  password: hgvkgyczaz
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
   database: article_manage_db
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,4 +24,5 @@ test:
 production:
   <<: *default
   database: article_manage_prod_db
+  username: admin
   password: <%= ENV['MYSITE_DATABASE_PASSWORD'] %>
