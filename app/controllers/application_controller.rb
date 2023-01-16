@@ -4,17 +4,17 @@ class ApplicationController < ActionController::Base
 
   # ログインを必須に
   def require_login
-    if !user_signed_in? 
-      flash[:alert] = "ログインしてください。"
-      redirect_to new_user_session_path
-    end
+    return if user_signed_in?
+
+    flash[:alert] = 'ログインしてください。'
+    redirect_to new_user_session_path
   end
 
   protected
 
   # usernameとpasswordでのログインも可能
   def configure_permitted_parameters
-    added_attrs = [ :email, :username, :password, :password_confirmation ]
+    added_attrs = %i[email username password password_confirmation]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
     devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
