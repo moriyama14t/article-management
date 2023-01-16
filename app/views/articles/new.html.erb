@@ -1,9 +1,27 @@
-<h1>New article</h1>
-
-<%= render "form", article: @article %>
-
-<br>
-
-<div>
-  <%= link_to "Back to articles", articles_path %>
+<div class="container">
+  <%= form_with(model: @article) do |form| %>
+    <% if @article.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+        <ul>
+          <% article.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-3">
+      <label for="url" class="form-label">記事URL</label>
+      <%= form.text_field :url, {class: "form-control"} %>
+    </div>
+    <div class="mb-3">
+      <label for="memo" class="form-label">メモ</label>
+      <%= form.text_area :description, {class: "form-control"} %>
+    </div>
+    <%= form.hidden_field :user_id, value: @article.user.id %>
+    <div class="d-flex">
+      <button type="submit" class="btn btn-primary d-flex m-1">登録</button>
+      <%= link_to "一覧画面へ戻る", articles_path, class: "btn btn-outline-danger d-flex m-1" %>
+    </div>
+  <% end %>
 </div>
