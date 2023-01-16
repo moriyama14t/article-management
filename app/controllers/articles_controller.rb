@@ -2,9 +2,13 @@ class ArticlesController < ApplicationController
   before_action :require_login
   before_action :set_article, only: %i[ show edit update destroy ]
 
-  # GET /articles or /articles.json
   def index
     @articles = Article.all
+  end
+
+  def discard_index
+    # 論理削除されたデータを全て取得 参考:https://qiita.com/piggydev/items/05e7276ed0cada69da76
+    @articles = Article.all.with_discarded.discarded
   end
 
   # GET /articles/1 or /articles/1.json
@@ -51,7 +55,7 @@ class ArticlesController < ApplicationController
 
   # DELETE /articles/1 or /articles/1.json
   def destroy
-    @article.destroy
+    @article.discard
 
     respond_to do |format|
       format.html { redirect_to articles_url, notice: "記事登録を削除しました。" }
