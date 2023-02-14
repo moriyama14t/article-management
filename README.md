@@ -1,24 +1,14 @@
-# README
+# 記事管理アプリ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby,RubyonRailsの学習用アプリ
 
-Things you may want to cover:
+## 使用技術
 
-* Ruby version
+1. インフラ
+    - 第一弾はfly.ioを使用
+    - 第二弾でAWSを使用（したい）
 
-* System dependencies
+1. バックエンド
+    - 言語:Ruby(v3.1.1)
+    - FW:RubyonRails(v7.0.4)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
