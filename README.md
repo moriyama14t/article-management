@@ -11,4 +11,6 @@ Ruby,RubyonRailsの学習用アプリ
 1. バックエンド
     - 言語:Ruby(v3.1.1)
     - FW:RubyonRails(v7.0.4)
-
+    
+1. デプロイ先
+    - https://article-manage-app.fly.dev/
