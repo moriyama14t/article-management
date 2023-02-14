@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :basic
 
   # ログインを必須に
   def require_login
@@ -8,6 +9,15 @@ class ApplicationController < ActionController::Base
 
     flash[:alert] = 'ログインしてください。'
     redirect_to new_user_session_path
+  end
+
+  def basic
+    Dotenv.load
+    authenticate_or_request_with_http_basic do |name, password|
+      puts ENV['BASIC_AUTH_NAME']
+      puts ENV['BASIC_AUTH_PASSWORD']
+      name == ENV['BASIC_AUTH_NAME'] && password == ENV['BASIC_AUTH_PASSWORD']
+    end
   end
 
   protected
