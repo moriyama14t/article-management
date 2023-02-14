@@ -6,18 +6,23 @@ class ApplicationController < ActionController::Base
   # ログインを必須に
   def require_login
     return if user_signed_in?
-
     flash[:alert] = 'ログインしてください。'
     redirect_to new_user_session_path
   end
 
+  # Basic認証
   def basic
     Dotenv.load
     authenticate_or_request_with_http_basic do |name, password|
-      puts ENV['BASIC_AUTH_NAME']
-      puts ENV['BASIC_AUTH_PASSWORD']
       name == ENV['BASIC_AUTH_NAME'] && password == ENV['BASIC_AUTH_PASSWORD']
     end
+  end
+
+  # 権限が足りない時、ダッシュボードへリダイレクト
+  rescue_from CanCan::AccessDenied do |exception|
+    Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
+    flash[:alert] = "権限がありません。"
+    redirect_to new_user_session_path
   end
 
   protected

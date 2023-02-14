@@ -6,16 +6,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<%= articles_path %>">記事一覧</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<%= discard_index_articles_path %>">削除記事</a>
-        </li>
+        <% if current_user %>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="<%= articles_path %>">記事一覧</a>
+          </li>
+          <% if !current_user.guest? %>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="<%= discard_index_articles_path %>">削除記事</a>
+            </li>
+          <% end %>
+        <% end %>
       </ul>
       <div class="d-flex">
         <% if current_user %>
-          <div class="d-flex m-1"><a class="btn btn-outline-success" href="<%= new_article_path %>">記事登録</a></div>
+          <% if !current_user.guest? %>
+            <div class="d-flex m-1"><a class="btn btn-outline-success" href="<%= new_article_path %>">記事登録</a></div>
+          <% end %>
           <div class="d-flex m-1"><%= link_to "ログアウト", destroy_user_session_path, method: :get, class: "btn btn-outline-danger" %></div>
         <% end %>
         <% if !current_user %>
