@@ -14,3 +14,6 @@ Ruby,RubyonRailsの学習用アプリ
     
 1. デプロイ先
     - https://article-manage-app.fly.dev/
+
+1. コマンド一覧
+    - ER図作成'bundle exec erd'
